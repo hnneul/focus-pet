@@ -23,9 +23,24 @@
     "storage",
     "tabs",
     "alarms",
-    "idle"
+    "idle",
+    "scripting"
   ],
   "background": {
     "service_worker": "background.js"
-  }
+  },
+  "host_permissions": [
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*.png",
+        "fonts/Galmuri11.woff2"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ]
 }
