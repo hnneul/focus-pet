@@ -1,0 +1,104 @@
+@font-face {
+  font-family: 'Galmuri11';
+  src: url('../fonts/Galmuri11.woff2') format('woff2');
+}
+
+:root {
+  --bg: #fffbea;
+  --card: #ffffff;
+  --line: #f0e2b6;
+  --text: #2b1d12;
+  --muted: #8a7a66;
+  --accent: #f8b010;
+  --danger: #d9412f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  width: 320px;
+  margin: 0;
+  padding: 14px;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.5 -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 2px dashed var(--line);
+}
+
+#pet { image-rendering: pixelated; }
+
+h1 {
+  margin: 0;
+  font: 18px 'Galmuri11', sans-serif;
+}
+
+.sub { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+
+h2 { margin: 12px 0 8px; font-size: 13px; }
+
+form { display: grid; gap: 6px; }
+.row { display: flex; gap: 6px; }
+
+input {
+  width: 100%;
+  min-width: 0;
+  padding: 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--text);
+  font: inherit;
+}
+
+input[type='checkbox'] { flex: none; width: 16px; height: 16px; margin: 0; accent-color: var(--accent); }
+
+input:focus, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+button {
+  flex: none;
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.error { margin: 0; color: var(--danger); font-size: 12px; }
+
+ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+
+li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+}
+
+li .title { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+li .left { flex: none; color: var(--muted); font-size: 12px; }
+li.overdue .left { color: var(--danger); font-weight: 600; }
+li.done { opacity: .45; }
+li.done .title { text-decoration: line-through; }
+
+li .delete {
+  padding: 0 4px;
+  background: none;
+  color: var(--muted);
+  font-weight: 400;
+}
+li .delete:hover { color: var(--danger); }
+
+.empty { margin: 10px 0 0; color: var(--muted); text-align: center; }
