@@ -1,0 +1,71 @@
+@font-face {
+  font-family: 'Galmuri11';
+  src: url('../fonts/Galmuri11.woff2') format('woff2');
+}
+
+:root {
+  --bg: #fffbea;
+  --card: #ffffff;
+  --line: #f0e2b6;
+  --text: #2b1d12;
+  --muted: #8a7a66;
+  --accent: #f8b010;
+  --danger: #d9412f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.5 -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+
+main {
+  display: grid;
+  gap: 20px;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 48px 16px;
+}
+
+/* 5-1. 펫 */
+.pet { text-align: center; }
+#pet { image-rendering: pixelated; animation: bounce 0.9s ease-in-out infinite; }
+#pet.explode { animation: tremble 0.12s linear infinite; }
+h1 { margin: 8px 0 0; font: 28px 'Galmuri11', sans-serif; }
+.status { margin: 4px 0 0; color: var(--muted); }
+.status b { color: var(--text); }
+#stage { color: var(--accent); font-weight: 600; }
+
+@keyframes bounce { 50% { transform: translateY(-8px); } }
+@keyframes tremble { 25% { transform: translate(-3px, 1px); } 75% { transform: translate(3px, -1px); } }
+@media (prefers-reduced-motion: reduce) { #pet { animation: none !important; } }
+
+.card {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+
+h2 { margin: 0 0 10px; font-size: 14px; }
+
+ul { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+
+/* 5-2. 할 일 */
+#todo-list li { display: flex; justify-content: space-between; gap: 12px; }
+#todo-list .title { min-width: 0; overflow-wrap: anywhere; }
+#todo-list .left { flex: none; color: var(--muted); }
+#todo-list .overdue .left { color: var(--danger); font-weight: 600; }
+
+/* 5-3. 7일 막대그래프 */
+#week-list li { display: grid; grid-template-columns: minmax(0, 8em) minmax(60px, 1fr) auto; align-items: center; gap: 10px; }
+#week-list .site { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#week-list .bar { height: 12px; border-radius: 6px; background: var(--line); overflow: hidden; }
+#week-list .bar span { display: block; height: 100%; background: var(--accent); }
+#week-list .time { color: var(--muted); font-size: 12px; }
+
+.empty { margin: 0; color: var(--muted); }

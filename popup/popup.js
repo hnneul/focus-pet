@@ -11,7 +11,7 @@ const isTodo = (t) =>
   t && typeof t.id === 'string' && typeof t.title === 'string' && Number.isFinite(t.due) && typeof t.done === 'boolean';
 
 async function load() {
-  const saved = await chrome.storage.local.get(['todos', 'sites', 'usage', 'tracking', 'stress', 'demo']);
+  const saved = await chrome.storage.local.get(['todos', 'sites', 'usage', 'tracking', 'stress', 'demo', 'petName']);
   todos = Array.isArray(saved.todos) ? saved.todos.filter(isTodo) : [];
   sites = Array.isArray(saved.sites) ? saved.sites.filter((s) => typeof s === 'string') : [...FP_CONFIG.defaultSites];
   const today = Object.values(saved.usage?.[new Date().toLocaleDateString('sv-SE')] ?? {});
@@ -19,6 +19,7 @@ async function load() {
   tracking = saved.tracking ?? null;
   stress = Number.isFinite(saved.stress) ? saved.stress : 0;
   $('demo').checked = saved.demo === true;
+  $('pet-name').value = typeof saved.petName === 'string' ? saved.petName : '';
   render();
   renderSites();
   renderStress();
@@ -41,15 +42,6 @@ function renderStress() {
   $('stage').textContent = stage.name;
   $('pet').src = `../icons/${stage.key}.png`;
   $('pet').alt = `${stage.name} 단계 병아리`;
-}
-
-// 1-6. 남은 시간: 1시간 미만은 분, 하루 미만은 시간, 그 이상은 D-day
-function leftText(due, now) {
-  const minutes = Math.floor((due - now) / 60000);
-  if (minutes < 60) return `${minutes}분 남음`;
-  if (minutes < 24 * 60) return `${Math.floor(minutes / 60)}시간 남음`;
-  const dayStart = (t) => new Date(t).setHours(0, 0, 0, 0);
-  return `D-${Math.round((dayStart(due) - dayStart(now)) / 86400000)}`;
 }
 
 function render() {
@@ -156,6 +148,9 @@ $('site-form').addEventListener('submit', (event) => {
   renderSites();
 });
 $('site-input').addEventListener('input', () => showError('site-error', ''));
+
+// 5-4. 펫 이름. 비우면 기본 이름(삐약이)
+$('pet-name').addEventListener('change', () => chrome.storage.local.set({ petName: $('pet-name').value.trim() }));
 
 // 3-5. 데모 모드
 $('demo').addEventListener('change', () => chrome.storage.local.set({ demo: $('demo').checked }));

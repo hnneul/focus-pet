@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>새 탭</title>
+  <link rel="stylesheet" href="newtab.css">
+</head>
+<body>
+  <main>
+    <section class="pet">
+      <img id="pet" src="../icons/calm.png" alt="평온 단계 펫" width="160" height="160">
+      <h1 id="pet-name">삐약이</h1>
+      <p class="status">스트레스 <b id="stress">0</b> · <span id="stage">평온</span></p>
+    </section>
+
+    <section class="card">
+      <h2>할 일</h2>
+      <ul id="todo-list"></ul>
+      <p id="todo-empty" class="empty" hidden>남은 할 일이 없어요.</p>
+    </section>
+
+    <section class="card">
+      <h2>최근 7일 도둑맞은 시간</h2>
+      <ul id="week-list"></ul>
+      <p id="week-empty" class="empty" hidden>아직 기록이 없어요.</p>
+    </section>
+  </main>
+
+  <script src="../config.js"></script>
+  <script src="../stress.js"></script>
+  <script src="newtab.js"></script>
+</body>
+</html>

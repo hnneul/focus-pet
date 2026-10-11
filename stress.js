@@ -1,4 +1,13 @@
-// 스트레스 계산과 단계 판정 (PRD #9). 백그라운드·팝업·테스트에서 같이 쓴다. config.js를 먼저 불러야 한다
+// 스트레스 계산, 단계 판정, 할 일 남은 시간 (PRD #9). 백그라운드·팝업·새 탭·테스트에서 같이 쓴다. config.js를 먼저 불러야 한다
+
+// 1-6. 할 일 남은 시간 (팝업·새 탭): 1시간 미만은 분, 하루 미만은 시간, 그 이상은 D-day
+function leftText(due, now) {
+  const minutes = Math.floor((due - now) / 60000);
+  if (minutes < 60) return `${minutes}분 남음`;
+  if (minutes < 24 * 60) return `${Math.floor(minutes / 60)}시간 남음`;
+  const dayStart = (t) => new Date(t).setHours(0, 0, 0, 0);
+  return `D-${Math.round((dayStart(due) - dayStart(now)) / 86400000)}`;
+}
 
 // 3-1. 완료하지 않은 할 일 중 마감이 가장 가까운 것에 따른 배수 (마감이 지났으면 가장 큰 배수)
 function deadlineTimes(todos, now) {
@@ -22,4 +31,4 @@ function stageOf(value) {
   return FP_CONFIG.stages.findLast((stage) => value >= stage.min);
 }
 
-if (typeof module !== 'undefined') module.exports = { deadlineTimes, nextStress, stageOf };
+if (typeof module !== 'undefined') module.exports = { leftText, deadlineTimes, nextStress, stageOf };
