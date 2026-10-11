@@ -42,8 +42,5 @@
         "*://*/*"
       ]
     }
-  ],
-  "chrome_url_overrides": {
-    "newtab": "newtab/newtab.html"
-  }
+  ]
 }

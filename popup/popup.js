@@ -168,6 +168,9 @@ $('site-form').addEventListener('submit', (event) => {
 });
 $('site-input').addEventListener('input', () => showError('site-error', ''));
 
+// 펫·할 일·최근 7일 그래프를 보는 대시보드를 새 탭으로 연다 (PRD #4-4)
+$('open-dashboard').addEventListener('click', () => chrome.tabs.create({ url: chrome.runtime.getURL('dashboard/dashboard.html') }));
+
 // 5-4. 펫 이름. 비우면 기본 이름(삐약이)
 $('pet-name').addEventListener('change', () => chrome.storage.local.set({ petName: $('pet-name').value.trim() }));
 
