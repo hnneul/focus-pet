@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "focus-pet",
-  "description": "딴짓하면 화내는 펫 — 할 일 마감과 딴짓 시간을 보고 점점 화를 내는 크롬 확장 프로그램",
+  "description": "시간 도둑 앞에서 화내는 펫 — 할 일 마감과 도둑맞은 시간을 보고 점점 화를 내는 크롬 확장 프로그램",
   "version": "0.1.0",
   "action": {
     "default_title": "focus-pet",
@@ -19,5 +19,13 @@
     "48": "icons/calm-48.png",
     "128": "icons/calm-128.png"
   },
-  "permissions": ["storage"]
+  "permissions": [
+    "storage",
+    "tabs",
+    "alarms",
+    "idle"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }

@@ -1,6 +1,6 @@
 // focus-pet 설정: 숫자와 대사는 이 파일에서만 고친다 (PRD #7)
 const FP_CONFIG = {
-  // 처음 설치했을 때 들어 있는 딴짓 사이트 (PRD #4-2)
+  // 처음 설치했을 때 들어 있는 방해 사이트 (PRD #4-2)
   defaultSites: ['youtube.com', 'netflix.com', 'tving.com', 'instagram.com', 'comic.naver.com'],
 
   defaultPetName: '삐약이',
@@ -8,11 +8,11 @@ const FP_CONFIG = {
   // 스트레스(0~100) 계산 규칙 (PRD #9)
   stress: {
     max: 100,
-    perDistractedMinute: 5, // 딴짓 사이트를 보는 1분마다
-    perCalmMinute: -2, // 딴짓 사이트 밖에서 1분마다
+    perDistractedMinute: 5, // 방해 사이트를 보는 1분마다
+    perCalmMinute: -2, // 방해 사이트 밖에서 1분마다
     snooze: 10, // "5분만"(미루기)을 누를 때
     taskDone: -30, // 할 일을 완료할 때
-    // 가장 급한 할 일의 마감이 가까우면 딴짓할 때 더 빨리 쌓인다
+    // 가장 급한 할 일의 마감이 가까우면 방해 사이트를 볼 때 더 빨리 쌓인다
     deadlineBoost: [
       { withinHours: 3, times: 2 },
       { withinHours: 24, times: 1.5 },
@@ -46,10 +46,10 @@ const FP_CONFIG = {
       '{task} 마감까지 {left}!!! 당장 꺼!!!',
       '{pet} 진짜 화났어. {task} 지금 안 하면 큰일 나!',
       '또 미뤘어? {task} {left} 남았다고!!',
-      '삐약!!! 딴짓 그만!!! {task}!!!',
+      '삐약!!! 이제 그만 봐!!! {task}!!!',
     ],
     // 등록된 할 일이 없을 때
-    nagNoTask: ['딴짓한 지 꽤 됐어… 이제 슬슬 돌아가자?', '{pet} 계속 보고 있다?'],
-    explodeNoTask: ['삐약!!! 딴짓 너무 오래 했어!!!', '{pet} 폭발 직전이야. 이제 그만!!'],
+    nagNoTask: ['여기 온 지 꽤 됐어… 이제 슬슬 돌아가자?', '{pet} 계속 보고 있다?'],
+    explodeNoTask: ['삐약!!! 너무 오래 봤어!!!', '{pet} 폭발 직전이야. 이제 그만!!'],
   },
 };

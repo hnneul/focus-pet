@@ -10,9 +10,10 @@
     <img id="pet" src="../icons/calm.png" alt="평온한 병아리" width="64" height="64">
     <div>
       <h1>focus-pet</h1>
-      <p class="sub">딴짓하면 화내는 펫</p>
+      <p class="sub">시간 도둑 앞에서 화내는 펫</p>
     </div>
   </header>
+  <p class="today">오늘 도둑맞은 시간 <b id="today-time">0분</b></p>
 
   <section>
     <h2>할 일</h2>
@@ -28,7 +29,18 @@
     <p id="todo-empty" class="empty">아직 등록된 할 일이 없어요.</p>
   </section>
 
+  <section>
+    <h2>시간 도둑 목록</h2>
+    <form id="site-form" class="row" novalidate>
+      <input id="site-input" type="text" placeholder="예: youtube.com" aria-label="시간 도둑 사이트 주소">
+      <button type="submit">추가</button>
+    </form>
+    <p id="site-error" class="error" role="alert" hidden></p>
+    <ul id="site-list" class="chips"></ul>
+  </section>
+
   <script src="../config.js"></script>
+  <script src="../sites.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
