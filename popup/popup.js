@@ -5,6 +5,7 @@ let sites = [];
 let todayMs = 0; // 오늘 저장된 방해받은 시간
 let tracking = null; // 지금 재고 있는 방해 사이트 { site, start }
 let stress = 0;
+let cheering = false; // 할 일을 완료해서 기뻐하는 중
 
 // 1-10. 크롬 저장소에 저장하고, 저장값 중 형식이 맞지 않는 것은 버린다
 const isTodo = (t) =>
@@ -40,8 +41,25 @@ function renderStress() {
   const stage = stageOf(stress);
   $('stress').textContent = Math.round(stress);
   $('stage').textContent = stage.name;
+  if (cheering) return;
   $('pet').src = `../icons/${stage.key}.png`;
   $('pet').alt = `${stage.name} 단계 병아리`;
+}
+
+// 6-6. 할 일을 완료하면 2초 동안 평온한 얼굴로 폴짝 뛰며 기뻐한다
+function cheer() {
+  const lines = FP_CONFIG.lines.happy;
+  cheering = true;
+  $('pet').src = '../icons/calm.png';
+  $('pet').classList.add('happy');
+  $('cheer').textContent = lines[Math.floor(Math.random() * lines.length)];
+  $('cheer').hidden = false;
+  setTimeout(() => {
+    cheering = false;
+    $('pet').classList.remove('happy');
+    $('cheer').hidden = true;
+    renderStress();
+  }, 2000);
 }
 
 function render() {
@@ -66,6 +84,7 @@ function renderItem(todo, now) {
   check.setAttribute('aria-label', `${todo.title} 완료`);
   check.addEventListener('change', () => {
     todo.done = check.checked;
+    if (todo.done) cheer();
     save();
     render();
   });

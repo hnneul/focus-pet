@@ -115,3 +115,16 @@ li .delete:hover { color: var(--danger); }
 .settings label { display: flex; align-items: center; gap: 6px; }
 .settings label:first-child { white-space: nowrap; }
 #pet-name { padding: 4px 8px; }
+
+/* 6-6. 할 일 완료 */
+.cheer {
+  margin: 0 0 0 auto;
+  padding: 4px 8px;
+  border: 2px solid var(--text);
+  background: var(--card);
+  font: 12px 'Galmuri11', sans-serif;
+  white-space: nowrap;
+}
+#pet.happy { animation: hop 0.4s ease-out 4; }
+@keyframes hop { 50% { transform: translateY(-10px); } }
+@media (prefers-reduced-motion: reduce) { #pet.happy { animation: none; } }
