@@ -53,3 +53,5 @@ const FP_CONFIG = {
     explodeNoTask: ['삐약!!! 너무 오래 봤어!!!', '{pet} 폭발 직전이야. 이제 그만!!'],
   },
 };
+
+if (typeof module !== 'undefined') module.exports = FP_CONFIG; // 터미널 테스트용

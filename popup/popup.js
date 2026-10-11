@@ -4,20 +4,24 @@ let todos = [];
 let sites = [];
 let todayMs = 0; // 오늘 저장된 방해받은 시간
 let tracking = null; // 지금 재고 있는 방해 사이트 { site, start }
+let stress = 0;
 
 // 1-10. 크롬 저장소에 저장하고, 저장값 중 형식이 맞지 않는 것은 버린다
 const isTodo = (t) =>
   t && typeof t.id === 'string' && typeof t.title === 'string' && Number.isFinite(t.due) && typeof t.done === 'boolean';
 
 async function load() {
-  const saved = await chrome.storage.local.get(['todos', 'sites', 'usage', 'tracking']);
+  const saved = await chrome.storage.local.get(['todos', 'sites', 'usage', 'tracking', 'stress', 'demo']);
   todos = Array.isArray(saved.todos) ? saved.todos.filter(isTodo) : [];
   sites = Array.isArray(saved.sites) ? saved.sites.filter((s) => typeof s === 'string') : [...FP_CONFIG.defaultSites];
   const today = Object.values(saved.usage?.[new Date().toLocaleDateString('sv-SE')] ?? {});
   todayMs = today.filter(Number.isFinite).reduce((sum, ms) => sum + ms, 0);
   tracking = saved.tracking ?? null;
+  stress = Number.isFinite(saved.stress) ? saved.stress : 0;
+  $('demo').checked = saved.demo === true;
   render();
   renderSites();
+  renderStress();
 }
 
 function save() {
@@ -28,6 +32,15 @@ function save() {
 function renderToday(now) {
   const live = tracking && Number.isFinite(tracking.start) ? now - tracking.start : 0;
   $('today-time').textContent = `${Math.floor((todayMs + live) / 60000)}분`;
+}
+
+// 3-6. 지금 스트레스와 단계, 위쪽 병아리 그림
+function renderStress() {
+  const stage = stageOf(stress);
+  $('stress').textContent = Math.round(stress);
+  $('stage').textContent = stage.name;
+  $('pet').src = `../icons/${stage.key}.png`;
+  $('pet').alt = `${stage.name} 단계 병아리`;
 }
 
 // 1-6. 남은 시간: 1시간 미만은 분, 하루 미만은 시간, 그 이상은 D-day
@@ -143,6 +156,16 @@ $('site-form').addEventListener('submit', (event) => {
   renderSites();
 });
 $('site-input').addEventListener('input', () => showError('site-error', ''));
+
+// 3-5. 데모 모드
+$('demo').addEventListener('change', () => chrome.storage.local.set({ demo: $('demo').checked }));
+
+// 백그라운드가 스트레스를 바꾸면 (할 일 완료 −30 등) 바로 반영
+chrome.storage.onChanged.addListener((change) => {
+  if (!change.stress) return;
+  stress = Number.isFinite(change.stress.newValue) ? change.stress.newValue : 0;
+  renderStress();
+});
 
 load();
 setInterval(render, 30000); // 팝업을 열어둔 동안 남은 시간 갱신

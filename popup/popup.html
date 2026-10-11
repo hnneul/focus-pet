@@ -13,7 +13,7 @@
       <p class="sub">시간 도둑 앞에서 화내는 펫</p>
     </div>
   </header>
-  <p class="today">오늘 도둑맞은 시간 <b id="today-time">0분</b></p>
+  <p class="today">오늘 도둑맞은 시간 <b id="today-time">0분</b> · 스트레스 <b id="stress">0</b> <span id="stage">평온</span></p>
 
   <section>
     <h2>할 일</h2>
@@ -39,8 +39,11 @@
     <ul id="site-list" class="chips"></ul>
   </section>
 
+  <label class="demo"><input id="demo" type="checkbox"> 데모 모드 (1분을 10초로 계산)</label>
+
   <script src="../config.js"></script>
   <script src="../sites.js"></script>
+  <script src="../stress.js"></script>
   <script src="popup.js"></script>
 </body>
 </html>
